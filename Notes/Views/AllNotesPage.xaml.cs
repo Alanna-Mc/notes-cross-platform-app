@@ -6,4 +6,10 @@ public partial class AllNotesPage : ContentPage
     {
         InitializeComponent();
     }
+
+    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    {
+        notesCollection.SelectedItem = null;
+    }
+
 }
