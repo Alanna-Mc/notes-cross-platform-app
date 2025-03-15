@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
@@ -58,19 +58,15 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+   		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-    	<EmbeddedResource Include="appsettings.json" />
-    	<None Update="appsettings.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    	</None>
+    	<ProjectReference Include="../Notes.Database/Notes.Database.csproj" />
 	</ItemGroup>
+
 
 </Project>

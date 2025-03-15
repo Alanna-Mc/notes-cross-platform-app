@@ -1,8 +1,8 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
-using Notes.Data;
-using Notes.Models;
+using Notes.Database.Data;
+using Notes.Database.Models;
     
 namespace Notes.ViewModels;
     

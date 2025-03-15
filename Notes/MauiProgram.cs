@@ -1,11 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using System.Reflection;
-using Microsoft.Extensions.Configuration;
-using Notes.Views;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Notes.Data;
 using Notes.ViewModels;
+using Notes.Database.Data;
+using Notes.Views;
+
 
 namespace Notes;
 
@@ -22,18 +19,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-			var a = Assembly.GetExecutingAssembly();
-			using var stream = a.GetManifestResourceStream("Notes.appsettings.json");
-    
-			var config = new ConfigurationBuilder()
-    		.AddJsonStream(stream)
-    		.Build();
-    
-			builder.Configuration.AddConfiguration(config);
-
-			var connectionString = builder.Configuration.GetConnectionString("DevelopmentConnection");
-			builder.Services.AddDbContext<NotesDbContext>(options => options.UseSqlServer(connectionString));
-
+			builder.Services.AddDbContext<NotesDbContext>();
 			builder.Services.AddSingleton<AllNotesViewModel>();
 			builder.Services.AddTransient<NoteViewModel>();
 

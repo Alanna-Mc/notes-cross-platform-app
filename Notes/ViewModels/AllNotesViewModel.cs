@@ -1,9 +1,7 @@
 using CommunityToolkit.Mvvm.Input;
+using Notes.Database.Data;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
-using Notes.Data;
-using Notes.Models;
 
 namespace Notes.ViewModels;
     
