@@ -6,18 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Notes.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class AddProjectTable : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "ProjectId",
-                table: "note",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "project",
                 columns: table => new
@@ -34,37 +27,40 @@ namespace Notes.Database.Migrations
                     table.PrimaryKey("PK_project", x => x.Id);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "note",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_note", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_note_project_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "project",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_note_ProjectId",
                 table: "note",
                 column: "ProjectId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_note_project_ProjectId",
-                table: "note",
-                column: "ProjectId",
-                principalTable: "project",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_note_project_ProjectId",
-                table: "note");
+            migrationBuilder.DropTable(
+                name: "note");
 
             migrationBuilder.DropTable(
                 name: "project");
-
-            migrationBuilder.DropIndex(
-                name: "IX_note_ProjectId",
-                table: "note");
-
-            migrationBuilder.DropColumn(
-                name: "ProjectId",
-                table: "note");
         }
     }
 }

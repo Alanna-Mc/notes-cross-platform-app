@@ -13,4 +13,7 @@ public class Note
     public string Text { get; set; }
     [Required]
     public DateTime Date { get; set; }
+    public int? ProjectId { get; set; }
+    public Project? Project { get; set; }
+
 }
